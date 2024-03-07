@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.emer.commerce.domain.Category;
 import com.emer.commerce.domain.Product;
 import com.emer.commerce.dto.incoming.addProductCommand;
 import com.emer.commerce.dto.incoming.updateProductCommand;
@@ -20,7 +21,7 @@ public class ProductService {
 
     @Autowired
     public ProductService(InventoryService inventoryService, ProductRepository productRepository,
-            CategoryService categoryService) {
+                          CategoryService categoryService) {
         this.inventoryService = inventoryService;
         this.productRepository = productRepository;
         this.categoryService = categoryService;
@@ -31,7 +32,7 @@ public class ProductService {
                 .name(command.getName())
                 .description(command.getDescription())
                 .SKU(command.getSKU())
-                .category(categoryService.findByName(command.getCategoryName()))
+                .category(categoryService.findCategoryByName(command.getCategoryName()))
                 .inventory(inventoryService.create(command.getInventoryCount()))
                 .price(command.getPrice())
                 .build();
@@ -61,7 +62,8 @@ public class ProductService {
         command.getName().ifPresent(product::setName);
         command.getDescription().ifPresent(product::setDescription);
         command.getSKU().ifPresent(product::setSKU);
-        command.getCategoryName().ifPresent(category -> product.setCategory(categoryService.findByName(category)));
+        command.getCategoryName()
+                .ifPresent(category -> product.setCategory(categoryService.findCategoryByName(category)));
         command.getPrice().ifPresent(product::setPrice);
         productRepository.save(product);
     }
@@ -69,5 +71,15 @@ public class ProductService {
     public Product findProductByInventory(Long id) {
         return productRepository.findByInventoryId(id)
                 .orElseThrow(() -> new RuntimeException("Product not found by id: " + id));
+    }
+
+    public List<Product> findAllProductsByCategoryId(Long id) {
+        return productRepository.findAllByCategoryId(id);
+    }
+
+    public void exchangeCategoryForAllProducts(Long CategoryId, Category replacementCategory) {
+        List<Product> products = productRepository.findAllByCategoryId(CategoryId);
+        products.forEach(product -> product.setCategory(replacementCategory));
+        productRepository.saveAll(products);
     }
 }
