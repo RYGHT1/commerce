@@ -9,7 +9,9 @@ import com.emer.commerce.dto.incoming.addProductCommand;
 import com.emer.commerce.dto.incoming.updateProductCommand;
 import com.emer.commerce.dto.outgoing.ProductFull;
 import com.emer.commerce.repositories.ProductRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductService {
 
     ProductRepository productRepository;

@@ -1,5 +1,6 @@
 package com.emer.commerce.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emer.commerce.domain.Category;
@@ -10,6 +11,7 @@ public class CategoryService {
 
     CategoryRepository categoryRepository;
 
+    @Autowired
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }

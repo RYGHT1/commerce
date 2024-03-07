@@ -20,7 +20,7 @@ public class Inventory extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
+    Long id;
 
     Integer quantity;
 }

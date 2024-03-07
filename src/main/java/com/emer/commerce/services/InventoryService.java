@@ -1,5 +1,6 @@
 package com.emer.commerce.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emer.commerce.domain.Inventory;
@@ -10,6 +11,7 @@ public class InventoryService {
 
     InventoryRepository inventoryRepository;
 
+    @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
