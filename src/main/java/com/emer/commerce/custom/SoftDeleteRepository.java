@@ -9,4 +9,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface SoftDeleteRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
 
     void softDelete(T entity);
+    void restore(T entity);
 }
