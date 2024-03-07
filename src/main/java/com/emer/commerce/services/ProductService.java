@@ -65,4 +65,9 @@ public class ProductService {
         command.getPrice().ifPresent(product::setPrice);
         productRepository.save(product);
     }
+
+    public Product findProductByInventory(Long id) {
+        return productRepository.findByInventoryId(id)
+                .orElseThrow(() -> new RuntimeException("Product not found by id: " + id));
+    }
 }
