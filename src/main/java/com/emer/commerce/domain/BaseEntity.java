@@ -7,14 +7,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@MappedSuperclass
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
+@MappedSuperclass
 public abstract class BaseEntity {
 
     @Column

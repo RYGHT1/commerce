@@ -1,7 +1,5 @@
 package com.emer.commerce.domain;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,11 +7,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Data
-public class Product {
+public class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,14 +43,4 @@ public class Product {
 
     @OneToOne
     Discount discount;
-
-    @Column(columnDefinition = "TIMESTAMP")
-
-    LocalDateTime created_at;
-
-    @Column(columnDefinition = "TIMESTAMP")
-    LocalDateTime modified_at;
-
-    @Column(columnDefinition = "TIMESTAMP")
-    LocalDateTime deleted_at;
 }
