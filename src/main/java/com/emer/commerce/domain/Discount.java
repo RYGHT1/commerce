@@ -1,5 +1,8 @@
 package com.emer.commerce.domain;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,5 +34,9 @@ public class Discount extends BaseEntity {
     Double discount_percent;
 
     Boolean active;
+
+    LocalDateTime scheduled_start;
+
+    LocalDateTime scheduled_end;
 }
 

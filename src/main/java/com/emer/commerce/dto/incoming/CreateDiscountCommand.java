@@ -1,5 +1,6 @@
 package com.emer.commerce.dto.incoming;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
@@ -17,5 +18,9 @@ public class CreateDiscountCommand {
 
     private Optional<String> name;
 
-    private Optional<Boolean> active = Optional.of(true);
+    private Optional<Boolean> active = Optional.of(false);
+
+    private Optional<LocalDateTime> scheduled_start;
+
+    private Optional<LocalDateTime> scheduled_end;
 }

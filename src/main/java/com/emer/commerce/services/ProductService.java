@@ -21,7 +21,7 @@ public class ProductService {
 
     @Autowired
     public ProductService(InventoryService inventoryService, ProductRepository productRepository,
-                          CategoryService categoryService) {
+            CategoryService categoryService) {
         this.inventoryService = inventoryService;
         this.productRepository = productRepository;
         this.categoryService = categoryService;
@@ -82,8 +82,7 @@ public class ProductService {
         return productRepository.findAllByCategoryId(id);
     }
 
-    public void exchangeCategoryForAllProducts(Long CategoryId, Category replacementCategory) {
-        List<Product> products = productRepository.findAllByCategoryId(CategoryId);
+    public void exchangeCategoryForAllProducts(List<Product> products, Category replacementCategory) {
         products.forEach(product -> product.setCategory(replacementCategory));
         productRepository.saveAll(products);
     }

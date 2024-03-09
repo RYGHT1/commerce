@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emer.commerce.domain.Category;
+import com.emer.commerce.domain.Product;
 import com.emer.commerce.dto.outgoing.CategoryDetails;
 import com.emer.commerce.dto.outgoing.CategoryFull;
 import com.emer.commerce.dto.outgoing.ProductDetails;
@@ -53,11 +54,12 @@ public class CategoryService {
     public void delete(Long id, Optional<String> replacementName) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found by id: " + id));
-        if (!productService.findAllProductsByCategoryId(id).isEmpty())
+        List<Product> products = productService.findAllProductsByCategoryId(id);
+        if (!products.isEmpty())
             replacementName.ifPresent(name -> {
                 Category replacementCategory = categoryRepository.findByName(name)
                         .orElseThrow(() -> new RuntimeException("Category not found by name: " + name));
-                productService.exchangeCategoryForAllProducts(id, replacementCategory);
+                productService.exchangeCategoryForAllProducts(products, replacementCategory);
             });
         categoryRepository.softDelete(category);
     }
