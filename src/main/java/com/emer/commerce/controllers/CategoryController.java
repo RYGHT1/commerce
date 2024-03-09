@@ -19,7 +19,7 @@ import com.emer.commerce.services.CategoryService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     
     CategoryService categoryService;

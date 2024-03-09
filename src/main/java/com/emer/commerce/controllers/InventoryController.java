@@ -18,7 +18,7 @@ import com.emer.commerce.services.InventoryService;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("/inventory")
+@RequestMapping("/api/v1/inventory")
 public class InventoryController {
     
     InventoryService inventoryService;

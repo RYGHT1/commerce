@@ -68,6 +68,11 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public Product findProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found by id: " + id));
+    }
+
     public Product findProductByInventory(Long id) {
         return productRepository.findByInventoryId(id)
                 .orElseThrow(() -> new RuntimeException("Product not found by id: " + id));
@@ -81,5 +86,10 @@ public class ProductService {
         List<Product> products = productRepository.findAllByCategoryId(CategoryId);
         products.forEach(product -> product.setCategory(replacementCategory));
         productRepository.saveAll(products);
+    }
+
+    public Product findProductByDiscountId(Long id) {
+        return productRepository.findByDiscountId(id)
+                .orElseThrow(() -> new RuntimeException("Product not found by id: " + id));
     }
 }
