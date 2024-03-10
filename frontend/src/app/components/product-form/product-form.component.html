@@ -1,0 +1,15 @@
+<div>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label
+        for="name"
+        class="form-control-label"
+        [ngClass]="{
+          'text-danger':
+            productForm.get('name').touched && productForm.get('name').invalid
+        }"
+        >Name</label
+      >
+    </div>
+  </form>
+</div>
